@@ -36,4 +36,4 @@ window.alles = (function () {
     }
   }
   return alles;
-});
+})();
