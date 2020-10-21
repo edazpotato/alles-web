@@ -1,8 +1,6 @@
 # alles-web
-A teeny-tiny Alles User API wrapper for WEB Javascript (not node.js)
+A teeny-tiny Alles User API (Horizon) wrapper for WEB Javascript (not node.js)
 
-# NOT CURRENTLY WORKING
-This wrapper isn't currently functioning because the server isn't setting proper CORS headers
 
 ## Instalation
 You can either self host [`alles-web.js`](https://raw.githubusercontent.com/edazpotato/alles-web/main/alles-web.js) or grab it from the CDN:
