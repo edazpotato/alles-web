@@ -14,7 +14,7 @@ After you've included the script, you can easily use any of the APIs
 
 ### Synchronous
 
-#### name + tag > id
+##### name + tag > id
 ```js
 var id = alles.nametag(name, tag);
 ```
@@ -23,7 +23,7 @@ example:
 var id = alles.nametag("Edaz", "6521");
 ```
 
-#### custom username > id
+##### custom username > id
 ```js
 var id = alles.username(customName);
 ```
@@ -32,7 +32,7 @@ example:
 var id = alles.username("Archie");
 ```
 
-### id > user data
+##### id > user data
 ```js
 var userData = alles.user(userId);
 ```
@@ -45,7 +45,7 @@ var userData = alles.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
 
 Exactly the same as synchronous but methods return a Promise insted of being blocking
 
-#### name + tag > id
+##### name + tag > id
 ```js
 var id = alles.a_anametag(name, tag);
 ```
@@ -54,7 +54,7 @@ example:
 var id = alles.a_nametag("Edaz", "6521");
 ```
 
-#### custom username > id
+##### custom username > id
 ```js
 var id = alles.a_username(customName);
 ```
@@ -63,7 +63,7 @@ example:
 var id = alles.a_username("Archie");
 ```
 
-### id > user data
+##### id > user data
 ```js
 var userData = alles.a_user(userId);
 ```
