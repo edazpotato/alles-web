@@ -21,7 +21,7 @@ window.alles = (function () {
   var alles = {
     /* Gets an alles user id by their name and tag */
     nametag: function(name, tag) {
-      var res = getJson("https://horizon.alles.cc/nametag?name=" + encodeURIComponent(name) + "&tag=" encodeURIComponent(tag));
+      var res = getJson("https://horizon.alles.cc/nametag?name=" + encodeURIComponent(name) + "&tag=" + encodeURIComponent(tag));
       return res;
     },
     /* Gets an alles user id by their custom username */
