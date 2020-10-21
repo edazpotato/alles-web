@@ -4,8 +4,8 @@ window.alles = (function () {
   function getJson(url) {
     var json;
     var req = new XMLHttpRequest();
-    req.setRequestHeader("Access-Control-Allow-Origin", "*");
     req.open("GET", url);
+    req.setRequestHeader("Access-Control-Allow-Origin", "*");
     req.onreadystatechange = function () {
       if (req.readyState === 4) {
         if (req.status === 200) {
