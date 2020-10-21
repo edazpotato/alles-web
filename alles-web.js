@@ -8,10 +8,10 @@ window.alles = (function () {
     req.onreadystatechange = function () {
       if (req.readyState === 4) {
         if (req.status === 200) {
-          json = JSON.parse(xhr.responseText);
+          json = JSON.parse(req.responseText);
         } else {
           console.warn("An error with the Alles API occured :(")
-          json = JSON.parse(xhr.responseText);
+          json = JSON.parse(req.responseText);
         }
       }
     }
