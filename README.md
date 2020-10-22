@@ -32,7 +32,7 @@ var id = alles.nametag(name, tag);
 ```
 example:
 ```js
-var id = alles.nametag("Edaz", "6521");
+console.log(alles.nametag("Edaz", "6521"));
 ```
 
 ##### custom username > id
@@ -41,7 +41,7 @@ var id = alles.username(customName);
 ```
 example:
 ```js
-var id = alles.username("Archie");
+console.log(alles.username("Archie"));
 ```
 
 ##### id > user data
@@ -50,7 +50,7 @@ var userData = alles.user(userId);
 ```
 example:
 ```js
-var userData = alles.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
+console.log(alles.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
 ```
 
 ### Asynchronous
@@ -63,7 +63,7 @@ var id = alles_a.nametag(name, tag);
 ```
 example:
 ```js
-var id = alles_a.nametag("Edaz", "6521");
+console.log(alles_a.nametag("Edaz", "6521"));
 ```
 
 ##### custom username > id
@@ -72,7 +72,7 @@ var id = alles_a.username(customName);
 ```
 example:
 ```js
-var id = alles_a.username("Archie");
+console.log(alles_a.username("Archie"));
 ```
 
 ##### id > user data
@@ -81,5 +81,5 @@ var userData = alles_a.user(userId);
 ```
 example:
 ```js
-var userData = alles_a.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
+console.log(alles_a.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
 ```
