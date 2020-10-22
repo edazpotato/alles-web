@@ -18,9 +18,6 @@ window.alles = (function () {
     req.send();
     return json;
   }
-  function aGetJson(url) {
-    return fetch(url).then((res) => res.json());
-  }
   var alles = {
     /* Gets an alles user id by their name and tag */
     nametag: function(name, tag) {
@@ -36,23 +33,7 @@ window.alles = (function () {
     user: function(id) {
       var res = getJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
       return res;
-    },
-    /* Gets an alles user id by their name and tag but is async */
-    a_nametag: function(name, tag) {
-      var res = aGetJson("https://horizon.alles.cc/nametag?name=" + encodeURIComponent(name) + "&tag=" + encodeURIComponent(tag));
-      return res;
-    },
-    /* Gets an alles user id by their custom username but is async */
-    a_username: function(username) {
-      var res = aGetJson("https://horizon.alles.cc/username/" + encodeURIComponent(username));
-      return res;
-    },
-    /* Gets an alles user data by their alles id but is async */
-    a_user: function(id) {
-      var res = aGetJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
-      return res;
     }
-    
   }
   return alles;
 })();
