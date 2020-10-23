@@ -1,8 +1,10 @@
 # alles-web
 A teeny-tiny Alles User API (Horizon) wrapper for WEB Javascript (not node.js)
 
-There are two versions of this library Synchronous and Asynchronous.
-The difference between the two is that sync is blocking, and has better browser support wheras async is not blocking, returns a promise and has worse browser support.
+[Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
+
+There are two versions of this library: Synchronous and Asynchronous.
+The difference between the two is that Synchronous is blocking and has good browser support wheras Asynchronous is not blocking, returns a promise but has worse browser support.
 
 ## Instalation
 
@@ -25,6 +27,7 @@ You can use the library from the CDN to get started quickly, but self hosting is
 After you've included the script, you can easily use any of the APIs
 
 ### Synchronous
+Standard version of the library. If you're unsure which version to use, use this one.
 
 ##### name + tag > id
 ```js
