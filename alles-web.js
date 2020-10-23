@@ -1,8 +1,12 @@
 // alles-web.js
 // Copyright (c) 2020 Edazpotato
-window.alles_a = (function () {
+window.alles = (function () {
   function aGetJson(url) {
-    return fetch(url).then((res) => res.json());
+    var json = fetch(url).then((res) => res.json());
+    if (json.err != undefined) {
+      console.warn("An error occured while fetching data from the Alles API :(")
+    }
+    return json;
   }
   var alles = {
 	nametag: function(name, tag) {

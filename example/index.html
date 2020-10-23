@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alles-web example</title>
+	<script type="text/javascript" src="alles-web.js" defer></script>
+	<script type="text/javascript" src="example.js" defer></script>
+	<link rel="stylesheet" type="text/css" href="picnic.min.css">
+	<style type="text/css">
+		.tallio {
+			height: 100%;
+		}
+		#user {
+			display: flex;
+		}
+		.avatar {
+			border-radius: 100%;
+			width: 250px;
+			height: 250px;
+		}
+		.plus {
+			border: 5px solid#FFD700;
+		}
+		.words {
+			margin-left: 10px;
+			display: flex;
+			flex-direction: column;
+		}
+		@media (max-width: 800) {
+			article {
+				padding: 25px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<section class="tallio flex three center">
+			<form class="half flex center" id="nametagForm">
+				<input type="text" placeholder="Edaz#6521" value="Edaz#6521" pattern="(.*)#(\d{4})" name="nametag" id="nametag">
+				<input value="Submit name and tag" type="submit">
+			</form>
+			<form class="half flex center" id="usernameForm">
+				<input type="text" placeholder="Archie" value="Archie" pattern="(.*)" name="username" id="username">
+				<input value="Submit username" type="submit">
+			</form>
+		</section>
+		<article class="card" id="user">
+		</article>
+	</main>
+</body>
+</html>
