@@ -9,7 +9,7 @@ window.alles = (function () {
     return json;
   }
   var alles = {
-	nametag: function(name, tag) {
+	  nametag: function(name, tag) {
       var res = aGetJson("https://horizon.alles.cc/nametag?name=" + encodeURIComponent(name) + "&tag=" + encodeURIComponent(tag));
       return res;
     },
