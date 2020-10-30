@@ -44,5 +44,5 @@ function updateProfile() {
 	}
 	var avatarUrl = "https://avatar.alles.cc/" + user.id;
 	var el = document.getElementById("user");
-	el.innerHTML = '<img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1>'+user.nickname+'</h1><h4>'+username+'</h4><p></p></aside>';
+	el.innerHTML = '<section clas="card"><img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1>'+user.nickname+'</h1><h4>'+username+'</h4><p></p></aside></section>';
 }
