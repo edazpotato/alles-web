@@ -9,8 +9,8 @@ window.alles = (function () {
     return json;
   }
   var alles = {
-	  nametag: function(name, tag) {
-      var res = aGetJson("https://horizon.alles.cc/nametag?name=" + encodeURIComponent(name) + "&tag=" + encodeURIComponent(tag));
+	nametag: function(name, tag) {
+      var res = aGetJson("https://horizon.alles.cc/nametag/" + encodeURIComponent(name) + "/" + encodeURIComponent(tag));
       return res;
     },
     /* Gets an alles user id by their custom username but is async */
@@ -27,4 +27,3 @@ window.alles = (function () {
   }
   return alles;
 })();
-
