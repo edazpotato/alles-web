@@ -14,12 +14,14 @@ async function handleSubmit(e) {
 		var name = split[0];
 		var tag = split[1];
 		id = await alles.nametag(name, tag);
-		getUserData();
+		
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		id = await alles.username(username);
-		getUserData();
-	}
+	} else {
+id = document.getElementById("id").value;
+}
+getUserData();
 }
 async function getUserData() {
 	if (id.err) {
