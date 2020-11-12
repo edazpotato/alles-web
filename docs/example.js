@@ -14,32 +14,23 @@ function handleSubmit(e) {
 		var name = split[0];
 		var tag = split[1];
 		alles.nametag(name, tag).then(function(res){
-			id = res;
-			getUserData();
-			console.log("Nametagged!")
+			user = res;
+			updateProfile();
 		});
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		alles.username(username).then(function(res){
-			id = res;
-			getUserData();
-			console.log("Usernamed!")
+			user = res;
+			updateProfile();
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
-		getUserData();
-		console.log("Ided!")
+		alles.user(id.id).then(function(res){
+			user = res;
+			updateProfile();
+		});
 	}
 
-}
-function getUserData() {
-	if (id.err) {
-		return alert("An error occured: " + id.err)
-	}
-	alles.user(id.id).then(function(res){
-		user = res;
-		updateProfile();
-	});
 }
 function updateProfile() {
 	if (user.err) {
