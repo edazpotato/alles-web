@@ -17,30 +17,98 @@
  */
  // alles-web.js
 window.alles = (function () {
-  function aGetJson(url) {
-    var json = fetch(url).then((res) => res.json());
-    if (json.err != undefined) {
-      console.warn("An error occured while fetching data from the Alles API :(")
-    }
-    return json;
-  }
-  var alles = {
-	  nametag: function(name, tag) {
-      var res = aGetJson("https://horizon.alles.cc/nametag/" + encodeURIComponent(name) + "/" + encodeURIComponent(tag));
-      return res;
-    },
-    /* Gets an alles user id by their custom username but is async */
-    username: function(username) {
-      var res = aGetJson("https://horizon.alles.cc/username/" + encodeURIComponent(username));
-      return res;
-    },
-    /* Gets an alles user data by their alles id but is async */
-    user: function(id) {
-      var res = aGetJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
-      return res;
-    }
-    
-  }
-  return alles;
+	var allesResponceCodes = {
+		"alreadySet": "This value has already been set and cannot be updated.",
+		"badAuthorization": "The user is not signed in, or the token/keys/credentials are incorrect.",
+		"badRequest": "Not all the required parameters were sent.",
+		"billing.invalidPlan": "This subscription plan cannot be subscribed to as it is not valid.",
+		"billing.unregistered": "This account does not have billing set up.",
+		"email.invalid": "This email address cannot be used because it is invalid.",
+		"internalError": "Something went wrong with the server. Contact support if this continues.",
+		"micro.post.invalidUrl": "The url is not valid so it cannot be posted.",
+		"micro.post.length": "The post content does not meet the length requirements.",
+		"micro.post.notAuthor": "This action cannot be performed on this post because the user is not the author of it.",
+		"micro.post.parent": "This reply cannot be posted because the parent does not exist.",
+		"missingResource": "The data that was requested does not exist.",
+		"notFound": "The page or endpoint does not exist.",
+		"plusOnly": "You must have Alles+ in order to make this request.",
+		"profile.name.tooLong": "This name cannot be set because it is too long.",
+		"profile.name.tooMany": "This name is used by too many other users.",
+		"profile.name.tooShort": "This name cannot be set because it is too short.",
+		"profile.nickname.tooLong": "This nickname cannot be set because it is too long.",
+		"profile.nickname.tooShort": "This nickname cannot be set because it is too short.",
+		"profile.tag.invalid": "This tag cannot be set because it is invalid. Tags must be 4-digit integers between 0001 and 9999.",
+		"profile.tag.unavailable": "This tag cannot be set because another user with the same name is using the tag.",
+		"profile.username.invalid": "This username cannot be set because it does not match the requirements.",
+		"profile.username.tooLong": "This username cannot be set because it is too long.",
+		"profile.username.tooShort": "This username cannot be set because it is too short.",
+		"profile.username.unavailable": "This username cannot be set because it is already in use by another user.",
+		"pulsar.unsupportedVersion": "The Pulsar client is not permitted to access the API, since it is an unsupported version.",
+		"quickauth.badToken": "The QuickAuth token is invalid.",
+		"quickauth.unregisteredRedirect": "The redirect url cannot be used for security reasons because it is not registered to the application.",
+		"session.badToken": "The session token provided is invalid.",
+		"user.follow.self": "Users cannot follow themselves.",
+		"user.password.incorrect": "This password is incorrect.",
+		"user.password.length": "This password does not meet the length requirements.",
+		"user.password.same": "This password cannot be set because it is the same as the current password.",
+		"user.signIn.credentials": "These credentials are incorrect and cannot be used to sign in.",
+		"user.xp.notEnough": "The user does not have enough xp to perform this action."
+	}
+	function APIResponce(res) {
+		var responce = new Promise(function(resolutionFunc, rejectionFunc){
+			res.then(function(res){return res.json()}).then(function(data){
+				var status = "success";
+				var errorMessage = null;
+				if (data.err) {
+					status = "error";
+					if (allesResponceCodes.hasOwnProperty(data.err)) {
+						errorMessage = allesResponceCodes[data.err];
+					} else {
+						errorMessage = "An unknown error occured with the Alles API.";
+					}
+				}
+				var responceObj = {
+					status: status,
+					errorMessage: errorMessage,
+					responce: data
+				}
+				resolutionFunc(responceObj);
+			}).catch(function(e){
+				rejectionFunc(e);
+			})
+		})
+		return responce;
+	}
+	function aGetJson(url) {
+		var options = {
+			method: 'get',
+			headers: {
+				'User-Agent': 'Alles-web API wrapper!'
+			}
+		}
+		return APIResponce(fetch(url, options));
+	}
+	var api = {
+		user: {
+			nametag: function(name, tag) {
+				var res = aGetJson("https://horizon.alles.cc/nametag/" + encodeURIComponent(name) + "/" + encodeURIComponent(tag));
+				return res;
+			},
+			username: function(username) {
+				var res = aGetJson("https://horizon.alles.cc/username/" + encodeURIComponent(username));
+				return res;
+			},
+			id: function(id) {
+				var res = aGetJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
+				return res;
+			}
+		},
+		spotify: {
+			id: function(id) {
+				 var res = aGetJson("https://spotify.alles.cc/alles/" + encodeURIComponent(id));
+				 return res;
+			}
+		}
+	}
+	return api;
 })();
-

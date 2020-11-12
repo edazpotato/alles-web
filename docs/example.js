@@ -18,6 +18,7 @@
  // example.js
 var id = {};
 var user = {};
+var song = {};
 var displayingProfile = false;
 var formEls = document.getElementsByTagName("form");
 for (var i=0, el; el = formEls[i]; i++) {
@@ -31,31 +32,41 @@ function handleSubmit(e) {
 		var split = nametag.split("#")
 		var name = split[0];
 		var tag = split[1];
-		alles.nametag(name, tag).then(function(res){
-			user = res;
-			updateProfile();
+		alles.user.nametag(name, tag).then(function(res){
+			user = res.responce;
+			getSpotify();
 		});
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
-		alles.username(username).then(function(res){
-			user = res;
-			updateProfile();
+		alles.user.username(username).then(function(res){
+			user = res.responce;
+			getSpotify();
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
-		alles.user(id.id).then(function(res){
-			user = res;
-			updateProfile();
+		alles.user.id(id.id).then(function(res){
+			user = res.responce;
+			getSpotify();
 		});
 	}
 
 }
+
+function getSpotify() {
+	NProgress.inc();
+	alles.spotify.id(user.id).then(function(data){
+		song = data.responce.item;
+		updateProfile();
+	});
+}
+
 function updateProfile() {
+	NProgress.inc();
 	if (user.err) {
 		return alert("An error occured: " + user.err)
 	}
 	var plus = "";
-	var titleText = "This user doesn't have Alles+ :(";
+	var titleText = "This user doesn't have Alles + :(";
 	if (user.plus) {
 		plus = "plus";
 		titleText = "✨ This user has Alles+ ✨";
@@ -73,6 +84,12 @@ function updateProfile() {
 	}
 	var avatarUrl = "https://avatar.alles.cc/" + user.id;
 	var el = document.getElementById("user");
-	el.innerHTML = '<section clas="card"><img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1>'+nickname+' ('+nametag+')</h1><h4>@'+username+'</h4><p></p><p>'+user.id+'</p<</aside></section>';
+	html = '<img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1>'+nickname+' ('+nametag+')</h1><h4>@'+username+'</h4><p>'+user.id+'</p></aside>';
+	if (song) {
+		artists = song.artists.map(function(artist){return artist.name;}).join(', ');
+		html = html + '<aside class="song-container">Currently listening to <b>'+song.name+'</b> by <b>'+artists+'</b></aside>';
+	}
+	html = '<section clas="card">' + html + '</section>';
+	el.innerHTML = html
 	NProgress.done();
 }
