@@ -1,9 +1,9 @@
 # alles-web
-A teeny-tiny Alles User API (Horizon) wrapper for WEB Javascript (not node.js)
+This is a wrapper for all the CORS-enabled Alles API's. It's for use on the web (not node.js)
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
 
-**This library will always return a promise**
+**All methods return a promise**
 
 ## Instalation
 
@@ -23,25 +23,33 @@ After you've included the script, you can easily use any of the APIs
 
 ### Methods:
 
-##### name + tag > id
+<details>
+	<summary>Horizon (user api) methods</summary>
+
+<details>
+	<summary>name + tag > user data</summary> 
 ```js
-var id = alles.nametag(name, tag);
+var userData = alles.nametag(name, tag);
 ```
 example:
 ```js
 console.log(alles.nametag("Edaz", "6521"));
 ```
+</details>
 
-##### custom username > id
+<details>
+	<summary>custom username > user data</summary>
 ```js
-var id = alles.username(customName);
+var userData = alles.username(customName);
 ```
 example:
 ```js
 console.log(alles.username("Archie"));
 ```
+</details>
 
-##### id > user data
+<details>
+	<summary>id > user data</summary>
 ```js
 var userData = alles.user(userId);
 ```
@@ -49,3 +57,5 @@ example:
 ```js
 console.log(alles.user("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
 ```
+</details>
+</details>
