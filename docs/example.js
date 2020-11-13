@@ -49,7 +49,6 @@ function handleSubmit(e) {
 			getSpotify();
 		});
 	}
-
 }
 
 function getSpotify() {
@@ -58,6 +57,7 @@ function getSpotify() {
 		song = data.responce.item;
 		updateProfile();
 	});
+	setTimeout(getSpotify, 2500);
 }
 
 function updateProfile() {
