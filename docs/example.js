@@ -16,16 +16,27 @@
  *
  */
  // example.js
-var id = {};
-var user = {};
-var song = {};
+var id;
+var user;
+var song;
+var spotifyIdVar;
+var loadSpotifyData = false;
 var displayingProfile = false;
-var formEls = document.getElementsByTagName("form");
-for (var i=0, el; el = formEls[i]; i++) {
-	el.addEventListener("submit", handleSubmit)
-}
+document.addEventListener("DOMContentLoaded", function(){
+	var formEls = document.getElementsByTagName("form");
+	for (var i=0, el; el = formEls[i]; i++) {
+		el.addEventListener("submit", handleSubmit);
+	}
+	document.getElementById("spotify-toggle").addEventListener("change", function(e){
+		loadSpotifyData = document.getElementById("spotify-toggle").checked;
+		if (displayingProfile && loadSpotifyData) {
+			getSpotify();
+		}
+	});
+});
 function handleSubmit(e) {
 	e.preventDefault();
+	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify func if it exists
 	NProgress.start();
 	if (e.target.id == "nametagForm") {
 		var nametag = document.getElementById("nametag").value;
@@ -57,7 +68,9 @@ function getSpotify() {
 		song = data.responce.item;
 		updateProfile();
 	});
-	setTimeout(getSpotify, 2500);
+	if (loadSpotifyData) {
+		spotifyIdVar = setTimeout(getSpotify, 2500);
+	}
 }
 
 function updateProfile() {
@@ -90,6 +103,7 @@ function updateProfile() {
 		html = html + '<aside class="song-container">Currently listening to <b>'+song.name+'</b> by <b>'+artists+'</b></aside>';
 	}
 	html = '<section clas="card">' + html + '</section>';
-	el.innerHTML = html
+	el.innerHTML = html;
+	displayingProfile = true;
 	NProgress.done();
 }
