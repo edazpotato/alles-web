@@ -157,7 +157,6 @@ example:
 }
 ```
 </details>
-</details>
 <details><summary>discordData</summary>
 
 ```js
@@ -225,4 +224,4 @@ example:
 ```
 </details>
 </details>
-
+</details>
