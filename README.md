@@ -24,8 +24,8 @@ After you've included the script, you can easily use any of the APIs
 ### API Reference
 
 <details><summary>Methods</summary>
-<details><summary>Horizon (user api) methods</summary>
-<details><summary>name + tag > userData</summary> 
+<details><summary>User methods</summary>
+<details><summary>Alles name + Alles tag > Alles userData</summary> 
 
 ```js
 var userData = alles.user.nametag(name, tag);
@@ -35,7 +35,7 @@ example:
 console.log(alles.user.nametag("Edaz", "6521"));
 ```
 </details>
-<details><summary>custom username > userData</summary>
+<details><summary>Alles custom username > Alles userData</summary>
 
 ```js
 var userData = alles.user.username(customName);
@@ -45,7 +45,7 @@ example:
 console.log(alles.user.username("Archie"));
 ```
 </details>
-<details><summary>id > userData</summary>
+<details><summary>Alles ID > Alles userData</summary>
 
 ```js
 var userData = alles.user.id(userId);
@@ -55,9 +55,19 @@ example:
 console.log(alles.user.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
 ```
 </details>
+<details><summary>Discord ID > Alles discordData</summary>
+
+```js
+var userData = alles.user.discordId(discordId);
+```
+example:
+```js
+console.log(alles.user.discordId("569414372959584256"));
+```
+</details>
 </details>
 <details><summary>Spotify methods</summary>
-<details><summary>id > listeningData</summary> 
+<details><summary>Alles ID > listeningData</summary> 
 
 ```js
 var listeningData = alles.spotify.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
@@ -144,6 +154,25 @@ example:
 	"plus": false,
 	"createdAt": "2020-10-16T21:06:41.000Z",
 	"cachedAt": "2020-11-12T06:56:57.000Z"
+}
+```
+</details>
+</details>
+<details><summary>discordData</summary>
+
+```js
+{
+	"alles": "",                   // Alles user ID.
+	"discord": "",                 // Discord user ID.
+	"createdAt": ""                // Timestamp of when the user first linkeed their Alles and Discord accounts.
+}
+```
+example:
+```json
+{
+	"alles": "fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d",
+	"discord": "569414372959584256",
+	"createdAt": "2020-10-28T03:11:21.000Z"
 }
 ```
 </details>

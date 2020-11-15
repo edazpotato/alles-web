@@ -102,6 +102,11 @@ window.alles = (function () {
 				var res = aGetJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
 				return res;
 			}
+			,
+			discordId: function(id) {
+				var res = aGetJson("https://discord.alles.cc/discord/" + encodeURIComponent(id));
+				return res;
+			}
 		},
 		spotify: {
 			id: function(id) {
