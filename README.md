@@ -119,21 +119,21 @@ example:
 
 ```js
 {
-	"id": "",                   // Alles user ID.
-	"name": "",                 // User's name, i.e. Name#Tag.
-	"tag": "",                  // User's discriminator tag, i.e. Name#Tag.
-	"nickname": "",             // User's nickname (will be null if none exists).
-	"username": ,               // Custom username, i.e. @Archie (will be null if none exists).
-		"xp": {                     // XP object.
+	"id": "",                       // Alles user ID.
+	"name": "",                     // User's name, i.e. Name#Tag.
+	"tag": "",                      // User's discriminator tag, i.e. Name#Tag.
+	"nickname": "",                 // User's nickname (will be null if none exists).
+	"username": ,                   // Custom username, i.e. @Archie (will be null if none exists).
+		"xp": {                 // XP object.
 		"total": 420,           // User's total Alles XP.
 		"level": 1,             // User's Alles level.
 		"levelXp": 420,         // How much xp the user has toward the next level.
 		"levelXpMax": 1000,     // The ammount of XP required to reach the next level.
 		"levelProgress": 0.420  // Number that represnts the user's progress towards leveling up.
 	},
-	"plus": false,              // True if the user has Alles +, otherwise false.
-	"createdAt": "",            // Timestamp of when the user first registered their Alles account.
-	"cachedAt": ""              // Timestamp of when this data was last cached by the server.
+	"plus": false,                  // True if the user has Alles +, otherwise false.
+	"createdAt": "",                // Timestamp of when the user first registered their Alles account.
+	"cachedAt": ""                  // Timestamp of when this data was last cached by the server.
 }
 ```
 example:
@@ -179,19 +179,19 @@ example:
 
 ```js
 {
-	"alles": ""             // Alles user ID.
-	"spotify": ""           // Spotify ID.
-	"checkedAt": ""         // Timestamp of when the data was last checked with Spotify.
-	"createdAt": ""         // Timestamp of when the user started listening to this song.
-	"item": {               // Song object (null if the user isn't listening to anything right now)
-		"id": ""            // Song ID.
-		"name": ""          // Display name of the song.
-		"playing": true     // True if the song is playing, false if it's paused.
-		"progress": 123     // Number that indicates how far through the song the user is.
-		"duration": 321     // Number that indicates the length of the song.
-		"explicit": false   // True is the song is flaged as explicit, false if it isn't.
-		"artists": [        // Array of objects with information about the song artists.
-			{               // Artist object.
+	"alles": "",                        // Alles user ID.
+	"spotify": "",                      // Spotify ID.
+	"checkedAt": "",                    // Timestamp of when the data was last checked with Spotify.
+	"createdAt": "",                    // Timestamp of when the user started listening to this song.
+	"item": {                           // Song object (null if the user isn't listening to anything right now)
+		"id": "",                   // Song ID.
+		"name": "",                 // Display name of the song.
+		"playing": true,            // True if the song is playing, false if it's paused.
+		"progress": 123,            // Number that indicates how far through the song the user is.
+		"duration": 321,            // Number that indicates the length of the song.
+		"explicit": false,          // True is the song is flaged as explicit, false if it isn't.
+		"artists": [                // Array of objects with information about the song artists.
+			{                   // Artist object.
 				"id": "",   // ID of the artist.
 				"name": ""  // Display name of the artist.
 			}
