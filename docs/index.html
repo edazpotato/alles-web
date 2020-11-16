@@ -4,10 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Alles-web example</title>
-	<script src='https://edazpotato.github.io/static/nprogress.js?v=0.2' defer></script>
-	<link rel='stylesheet' href='https://edazpotato.github.io/static/nprogress.css?v=0.2'/>
-	<script src='https://edazpotato.github.io/static/notyf.min.js?v=0.2' defer></script>
-	<link rel='stylesheet' href='https://edazpotato.github.io/static/notyf.min.css?v=0.2'/>
+	<!-- This stuff is stored here: https://github.com/edazpotato/edazpotato.github.io/blob/master/static -->
+	<script src='/static/nprogress.js?v=0.2' defer></script>
+	<link rel='stylesheet' href='/static/nprogress.css?v=0.2'/>
+	<script src='/static/notyf.min.js?v=0.2' defer></script>
+	<link rel='stylesheet' href='/static/notyf.min.css?v=0.2'/>
+	<!-- End externally hosted stuff -->
 	<script type="text/javascript" src="alles-web.js?v=0.2" defer></script>
 	<script type="text/javascript" src="example.js?v=0.2" defer></script>
 	<style type="text/css">
@@ -54,7 +56,7 @@
 				<input value="Submit ID" type="submit">
 			</form>
 			<form id="discordIdForm">
-				<input type="text" name="discordId" id="id" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required>
+				<input type="text" name="discordId" id="discordId" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required>
 				<input value="Submit Discord ID" type="submit">
 			</form>
 			<div class="switch">
