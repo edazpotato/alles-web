@@ -22,6 +22,13 @@ var song;
 var spotifyIdVar;
 var loadSpotifyData = false;
 var displayingProfile = false;
+const notyf = new Notyf({
+  duration: 4500,
+  position: {
+    x: 'right',
+    y: 'top',
+  }
+});
 document.addEventListener("DOMContentLoaded", function(){
 	var formEls = document.getElementsByTagName("form");
 	for (var i=0, el; el = formEls[i]; i++) {
