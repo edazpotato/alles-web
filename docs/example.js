@@ -46,12 +46,21 @@ function handleSubmit(e) {
 		alles.user.nametag(name, tag).then(function(res){
 			user = res.responce;
 			getSpotify();
-		});
+		});discordIdForm
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		alles.user.username(username).then(function(res){
 			user = res.responce;
 			getSpotify();
+		});
+	} else if (e.target.id == "discordIdForm") {
+		var discordId = document.getElementById("discordId").value;
+		alles.user.discordId(discordId).then(function(res){
+			NProgress.inc();
+			alles.user.id(res.responce.id).then(function(res){
+				user = res.responce;
+				getSpotify();
+			});
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
