@@ -18,6 +18,7 @@
  // alles-web.js
 window.alles = (function () {
 	var allesResponceCodes = {
+		"unknown": "An unknown error occured with the Alles API.",
 		"alreadySet": "This value has already been set and cannot be updated.",
 		"badAuthorization": "The user is not signed in, or the token/keys/credentials are incorrect.",
 		"badRequest": "Not all the required parameters were sent.",
@@ -52,27 +53,36 @@ window.alles = (function () {
 		"user.password.length": "This password does not meet the length requirements.",
 		"user.password.same": "This password cannot be set because it is the same as the current password.",
 		"user.signIn.credentials": "These credentials are incorrect and cannot be used to sign in.",
-		"user.xp.notEnough": "The user does not have enough xp to perform this action."
+		"user.xp.notEnough": "The user does not have enough xp to perform this action.",
+		"archie.needs.to.fucking.enable.cors": "The owner/developer of Alles (Archie) has been too lazy to enable cors on this api so you'll just have to wait for him get off his ass and enable it."
 	}
 	function APIResponce(res) {
 		var responce = new Promise(function(resolutionFunc, rejectionFunc){
 			res.then(function(res){return res.json()}).then(function(data){
 				var status = "success";
 				var errorMessage = null;
+				var errorCode = null;
 				if (data.err) {
 					status = "error";
 					if (allesResponceCodes.hasOwnProperty(data.err)) {
 						errorMessage = allesResponceCodes[data.err];
+						errorCode = data.err;
 					} else {
 						errorMessage = "An unknown error occured with the Alles API.";
+						errorCode = "unknown";
 					}
 				}
 				var responceObj = {
 					status: status,
 					errorMessage: errorMessage,
+					errorCode: errorCode,
 					responce: data
 				}
-				resolutionFunc(responceObj);
+				if (data.err){
+					return rejectionFunc(responceObj);
+				} else {
+					return resolutionFunc(responceObj);
+				}
 			}).catch(function(e){
 				rejectionFunc(e);
 			})

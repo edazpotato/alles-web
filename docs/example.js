@@ -46,18 +46,24 @@ function handleSubmit(e) {
 		alles.user.nametag(name, tag).then(function(res){
 			user = res.responce;
 			getSpotify();
+		}).catch(function(err){
+			notyf.error(err.errorMessage)
 		});
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		alles.user.username(username).then(function(res){
 			user = res.responce;
 			getSpotify();
+		}).catch(function(err){
+			notyf.error(err.errorMessage)
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
 		alles.user.id(id.id).then(function(res){
 			user = res.responce;
 			getSpotify();
+		}).catch(function(err){
+			notyf.error(err.errorMessage)
 		});
 	}
 }
@@ -67,6 +73,8 @@ function getSpotify() {
 	alles.spotify.id(user.id).then(function(data){
 		song = data.responce.item;
 		updateProfile();
+	}).catch(function(err){
+		notyf.error(err.errorMessage)
 	});
 	if (loadSpotifyData) {
 		spotifyIdVar = setTimeout(getSpotify, 2500);
