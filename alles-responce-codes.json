@@ -1,4 +1,5 @@
 {
+	"unknown": "An unknown error occured with the Alles API.",
 	"alreadySet": "This value has already been set and cannot be updated.",
 	"badAuthorization": "The user is not signed in, or the token/keys/credentials are incorrect.",
 	"badRequest": "Not all the required parameters were sent.",

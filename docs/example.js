@@ -22,6 +22,13 @@ var song;
 var spotifyIdVar;
 var loadSpotifyData = false;
 var displayingProfile = false;
+const notyf = new Notyf({
+  duration: 4500,
+  position: {
+    x: 'right',
+    y: 'top',
+  }
+});
 document.addEventListener("DOMContentLoaded", function(){
 	var formEls = document.getElementsByTagName("form");
 	for (var i=0, el; el = formEls[i]; i++) {
@@ -44,7 +51,7 @@ function handleSubmit(e) {
 		var name = split[0];
 		var tag = split[1];
 		alles.user.nametag(name, tag).then(function(res){
-			user = res.responce;
+			user = res.response;
 			getSpotify();
 		}).catch(function(err){
 			notyf.error(err.errorMessage)
@@ -52,18 +59,32 @@ function handleSubmit(e) {
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		alles.user.username(username).then(function(res){
-			user = res.responce;
+			user = res.response;
 			getSpotify();
 		}).catch(function(err){
-			notyf.error(err.errorMessage)
+			notyf.error(err.errorMessage);
+			NProgress.done();
+		});
+	} else if (e.target.id == "discordIdForm") {
+		var discordId = document.getElementById("discordId").value;
+		alles.user.discordId(discordId).then(function(res){
+			NProgress.inc();
+			alles.user.id(res.response.id).then(function(res){
+				user = res.response;
+				getSpotify();
+			}).catch(function(err){
+				notyf.error(err.errorMessage);
+				NProgress.done();
+			});
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
 		alles.user.id(id.id).then(function(res){
-			user = res.responce;
+			user = res.response;
 			getSpotify();
 		}).catch(function(err){
-			notyf.error(err.errorMessage)
+			notyf.error(err.errorMessage);
+			NProgress.done();
 		});
 	}
 }
@@ -71,10 +92,11 @@ function handleSubmit(e) {
 function getSpotify() {
 	NProgress.inc();
 	alles.spotify.id(user.id).then(function(data){
-		song = data.responce.item;
+		song = data.response.item;
 		updateProfile();
 	}).catch(function(err){
-		notyf.error(err.errorMessage)
+		notyf.error(err.errorMessage);
+		NProgress.done();
 	});
 	if (loadSpotifyData) {
 		spotifyIdVar = setTimeout(getSpotify, 2500);
