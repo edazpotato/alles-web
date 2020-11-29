@@ -3,6 +3,8 @@ This is a wrapper for all the CORS-enabled Alles API's. It's for use on the web 
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
 
+> **IF THE DISCORD METHOD REJECTS WITH A CORS ERROR THATS BECAUSE ARCHIE WONT ADD CORS TO IT. GO BOTHER HIM OVER ON DISCORD SO HE ADDS CORD SUPPORT!!!**
+
 **All methods return a promise**
 
 ## Instalation
