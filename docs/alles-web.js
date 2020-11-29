@@ -58,8 +58,10 @@ window.alles = (function () {
 	}
 	function APIResponse(res) {
 		var response = new Promise(function(resolutionFunc, rejectionFunc){
-			res.then(function(res){return res.json()}).catch(function(err){
-				const code = "archie.needs.to.fucking.enable.cors";
+			res.then(function(res){
+				return res.json()
+			}).catch(function(err){
+				var code = "archie.needs.to.fucking.enable.cors";
 				rejectionFunc({					
 					status: "error",
 					errorMessage: allesResponseCodes[code],
@@ -90,8 +92,8 @@ window.alles = (function () {
 				} else {
 					return resolutionFunc(responseObj);
 				}
-			}).catch(function(e){
-				const code = "unknown";
+			}).catch(function(err){
+				var code = "unknown";
 				rejectionFunc({					
 					status: "error",
 					errorMessage: allesResponseCodes[code],

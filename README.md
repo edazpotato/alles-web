@@ -1,9 +1,9 @@
-# alles-web V0.2
-This is a wrapper for all the CORS-enabled Alles API's. It's for use on the web (not node.js)
+# alles-web V0.3
+This is a wrapper for all the public information Alles API's. It's for use on the web (not node.js).
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
 
-> **IF THE DISCORD METHOD REJECTS WITH A CORS ERROR THATS BECAUSE ARCHIE WONT ADD CORS TO IT. GO BOTHER HIM OVER ON DISCORD SO HE ADDS CORD SUPPORT!!!**
+> **IF THE ANY METHOD REJECTS WITH A CORS ERROR THATS BECAUSE ARCHIE DROPPED SUPPORT CORS FOR IT. GO BOTHER HIM OVER ON DISCORD SO HE ADDS CORS AGAIN!!!**
 
 
 ## Instalation
@@ -87,7 +87,8 @@ All methods return an `APIResponse` object, which looks like this:
 ```js
 {
 	"status": "",        // Either 'success' or 'error'. If it is 'success' continue as normal. If it is 'error' consider showing errorMessage to your users.
-	"errorMessage": "",  // This will have a human-readable (engligh) error message (will be null if there was not an eror).
+	"errorMessage": "",  // This will have a human-readable (english) error message (will be null if there was not an eror).
+	"errorCode": "",     // This ill be the error code that corolates with the error message so that you can implemnt your own error messages or translate them
 	"response": {}       // An object that contains the response from that request, such as a `userData` or `listeningData` object.
 }
 ```
@@ -96,6 +97,7 @@ example:
 {
 	"status": "success",
 	"errorMessage": null,
+	"errorCode": null,
 	"response": {
 		"id": "00000000-0000-0000-0000-000000000000",
 		"name": "Archie",
