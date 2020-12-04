@@ -76,6 +76,9 @@ function handleSubmit(e) {
 				notyf.error(err.errorMessage);
 				NProgress.done();
 			});
+		}).catch(function(err){
+			notyf.error(err.errorMessage);
+			NProgress.done();
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
