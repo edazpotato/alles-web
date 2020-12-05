@@ -57,58 +57,57 @@ window.alles = (function () {
 		"archie.needs.to.fucking.enable.cors": "The owner/developer of Alles (Archie) has been too lazy to enable cors on this api so you'll just have to wait for him get off his ass and enable it."
 	}
 	function APIResponse(res) {
-		var response = new Promise(function(resolutionFunc, rejectionFunc){
-			res.then(function(res){
-				return res.json()
-			}).catch(function(err){
+		var response = new Promise(function(resolve, reject){
+			res.catch(function(err){
 				var code = "archie.needs.to.fucking.enable.cors";
-				rejectionFunc({					
+				return reject({					
 					status: "error",
 					errorMessage: allesResponseCodes[code],
-					errorCode: code
+					errorCode: code,
+					response: null
+				});
+			}).then(function(res){
+				return res.json();
+			}).catch(function(err){
+				var code = "unknown";
+				return reject({					
+					status: "error",
+					errorMessage: allesResponseCodes[code],
+					errorCode: code,
+					response: null
 				});
 			}).then(function(data){
 				var status = "success";
 				var errorMessage = null;
-				var errorCode = null;
-				if (data.err) {
+				var code = null;
+				if (data && data.err) {
 					status = "error";
 					if (allesResponseCodes.hasOwnProperty(data.err)) {
 						errorMessage = allesResponseCodes[data.err];
-						errorCode = data.err;
+						code = data.err;
 					} else {
-						errorMessage = "An unknown error occured with the Alles API.";
-						errorCode = "unknown";
+						code = "unknown";
+						errorMessage = allesResponseCodes[code];
 					}
 				}
 				var responseObj = {
 					status: status,
 					errorMessage: errorMessage,
-					errorCode: errorCode,
+					errorCode: code,
 					response: data
 				}
 				if (data.err){
-					return rejectionFunc(responseObj);
+					return reject(responseObj);
 				} else {
-					return resolutionFunc(responseObj);
+					return resolve(responseObj);
 				}
-			}).catch(function(err){
-				var code = "unknown";
-				rejectionFunc({					
-					status: "error",
-					errorMessage: allesResponseCodes[code],
-					errorCode: code
-				});
-			})
-		})
+			});
+		});
 		return response;
 	}
 	function aGetJson(url) {
 		var options = {
-			method: 'get',
-			headers: {
-				'User-Agent': 'Alles-web API wrapper!'
-			}
+			method: 'get'
 		}
 		return APIResponse(fetch(url, options));
 	}
@@ -126,16 +125,25 @@ window.alles = (function () {
 				var res = aGetJson("https://horizon.alles.cc/users/" + encodeURIComponent(id));
 				return res;
 			}
-			,
-			discordId: function(id) {
-				var res = aGetJson("https://discord.alles.cc/discord/" + encodeURIComponent(id));
+		},
+		spotify: {
+			allesId: function(id) {
+				 var res = aGetJson("https://spotify.alles.cc/alles/" + encodeURIComponent(id));
+				 return res;
+			},
+			id: function(id) {
+				var res = aGetJson("https://spotify.alles.cc/spotify/" + encodeURIComponent(id));
 				return res;
 			}
 		},
-		spotify: {
-			id: function(id) {
-				 var res = aGetJson("https://spotify.alles.cc/alles/" + encodeURIComponent(id));
+		discord: {
+			allesId: function(id) {
+				 var res = aGetJson("https://discord.alles.cc/alles/" + encodeURIComponent(id));
 				 return res;
+			},
+			id: function(id) {
+				var res = aGetJson("https://discord.alles.cc/discord/" + encodeURIComponent(id));
+				return res;
 			}
 		}
 	}

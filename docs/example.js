@@ -16,10 +16,10 @@
  *
  */
  // example.js
-var id;
-var user;
-var song;
-var spotifyIdVar;
+var id = null;
+var user = null;
+var song = null;
+var spotifyIdVar = null;
 var loadSpotifyData = false;
 var displayingProfile = false;
 const notyf = new Notyf({
@@ -30,83 +30,90 @@ const notyf = new Notyf({
   }
 });
 document.addEventListener("DOMContentLoaded", function(){
+	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
 	var formEls = document.getElementsByTagName("form");
 	for (var i=0, el; el = formEls[i]; i++) {
 		el.addEventListener("submit", handleSubmit);
 	}
 	document.getElementById("spotify-toggle").addEventListener("change", function(e){
-		loadSpotifyData = document.getElementById("spotify-toggle").checked;
-		if (displayingProfile && loadSpotifyData) {
-			getSpotify();
-		}
+		getSpotify();
 	});
 });
 function handleSubmit(e) {
 	e.preventDefault();
-	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify func if it exists
+	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
 	NProgress.start();
 	if (e.target.id == "nametagForm") {
 		var nametag = document.getElementById("nametag").value;
 		var split = nametag.split("#")
 		var name = split[0];
 		var tag = split[1];
-		alles.user.nametag(name, tag).then(function(res){
-			user = res.response;
-			getSpotify();
-		}).catch(function(err){
+		alles.user.nametag(name, tag).catch(function(err){
 			notyf.error(err.errorMessage)
+		}).then(function(res){
+			user = res.response;
+			updateProfile();
 		});
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
-		alles.user.username(username).then(function(res){
-			user = res.response;
-			getSpotify();
-		}).catch(function(err){
+		alles.user.username(username).catch(function(err){
 			notyf.error(err.errorMessage);
 			NProgress.done();
+		}).then(function(res){
+			user = res.response;
+			updateProfile();
 		});
 	} else if (e.target.id == "discordIdForm") {
 		var discordId = document.getElementById("discordId").value;
-		alles.user.discordId(discordId).then(function(res){
-			NProgress.inc();
-			alles.user.id(res.response.id).then(function(res){
-				user = res.response;
-				getSpotify();
-			}).catch(function(err){
-				notyf.error(err.errorMessage);
-				NProgress.done();
-			});
-		}).catch(function(err){
+		alles.discord.id(discordId).catch(function(err){
 			notyf.error(err.errorMessage);
 			NProgress.done();
+		}).then(function(res){
+			NProgress.inc();
+			alles.user.id(res.response.id).catch(function(err){
+				notyf.error(err.errorMessage);
+				NProgress.done();
+			}).then(function(res){
+				user = res.response;
+				updateProfile();
+			});
 		});
 	} else {
 		id = {id: document.getElementById("id").value};
-		alles.user.id(id.id).then(function(res){
-			user = res.response;
-			getSpotify();
-		}).catch(function(err){
+		alles.user.id(id.id).catch(function(err){
 			notyf.error(err.errorMessage);
 			NProgress.done();
+		}).then(function(res){
+			user = res.response;
+			updateProfile();
 		});
 	}
 }
 
 function getSpotify() {
+	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
 	NProgress.inc();
-	alles.spotify.id(user.id).then(function(data){
-		song = data.response.item;
-		updateProfile();
-	}).catch(function(err){
-		notyf.error(err.errorMessage);
+	loadSpotifyData = document.getElementById("spotify-toggle").checked;
+	if (displayingProfile && loadSpotifyData) {
+		alles.spotify.allesId(id.id).catch(function(err){
+			notyf.error(err.errorMessage);
+			NProgress.done();
+		}).then(function(data){
+			console.log("Got spotify!")
+			console.log(data)
+			song = data.response.item;
+			updateProfile();
+		});
+		if (loadSpotifyData) {
+			spotifyIdVar = setTimeout(getSpotify, 2500);
+		}
+	} else {
 		NProgress.done();
-	});
-	if (loadSpotifyData) {
-		spotifyIdVar = setTimeout(getSpotify, 2500);
 	}
 }
 
 function updateProfile() {
+	console.log("Updating profile")
 	NProgress.inc();
 	if (user.err) {
 		return alert("An error occured: " + user.err)
