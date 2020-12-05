@@ -1,4 +1,4 @@
-# alles-web V0.3
+# alles-web V0.4
 This is a wrapper for all the public information Alles API's. It's for use on the web (not node.js).
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
@@ -10,7 +10,7 @@ This is a wrapper for all the public information Alles API's. It's for use on th
 
 ### Self hosting
 Download the library:
-- [Asynchronous](https://raw.githubusercontent.com/edazpotato/alles-web/main/alles-web.js)
+- [From github](https://raw.githubusercontent.com/edazpotato/alles-web/main/alles-web.js)
 
 ### CDN
 You can use the library from the CDN to get started quickly, but self hosting is recomened.
@@ -25,25 +25,26 @@ All the mothds return a pending promise, with an `APIResponse` object. If the re
 ### API Reference
 
 <details><summary>Methods</summary>
+Methods are sorted by what service they intergrate with. `alles.user` methods intergrate with the core Alles User system, `alles.discord` methods intergrate with the Alles Discord Account linking system, `alles.spotify` methods intergrate with the  Alles Spotify Listening Data system.
 <details><summary>User methods</summary>
-<details><summary>Alles name + Alles tag > Alles userData</summary> 
+<details><summary>Alles User Name (different from Custom Username) + Alles User Tag > Alles userData</summary> 
 
 ```js
 var userData = alles.user.nametag(name, tag);
 ```
 example:
 ```js
-console.log(alles.user.nametag("Edaz", "6521"));
+alles.user.nametag("Edaz", "6521").catch(err=>console.error(err)).then(data=>console.log(data));
 ```
 </details>
-<details><summary>Alles custom username > Alles userData</summary>
+<details><summary>Alles Custom Username > Alles userData</summary>
 
 ```js
 var userData = alles.user.username(customName);
 ```
 example:
 ```js
-console.log(alles.user.username("Archie"));
+alles.user.username("Archie").catch(err=>console.error(err)).then(data=>console.log(data));
 ```
 </details>
 <details><summary>Alles ID > Alles userData</summary>
@@ -53,17 +54,29 @@ var userData = alles.user.id(userId);
 ```
 example:
 ```js
-console.log(alles.user.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
+alles.user.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d").catch(err=>console.error(err)).then(data=>console.log(data));
 ```
 </details>
-<details><summary>Discord ID > Alles discordData</summary>
+</details>
+<details><summary>Discord methods</summary>
+<details><summary>Alles ID > Alles discordData</summary>
 
 ```js
-var userData = alles.user.discordId(discordId);
+var discordData = alles.discord.allesId(allesId);
 ```
 example:
 ```js
-console.log(alles.user.discordId("569414372959584256"));
+alles.discord.allesId("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d").catch(err=>console.error(err)).then(data=>console.log(data));
+```
+</details>
+<details><summary>Discord ID > Alles discordData</summary> 
+
+```js
+var userData = alles.discord.id(discordId);
+```
+example:
+```js
+alles.discord.id("569414372959584256").catch(err=>console.error(err)).then(data=>console.log(data));
 ```
 </details>
 </details>
@@ -71,11 +84,21 @@ console.log(alles.user.discordId("569414372959584256"));
 <details><summary>Alles ID > listeningData</summary> 
 
 ```js
-var listeningData = alles.spotify.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
+var listeningData = alles.spotify.allesId("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
 ```
 example:
 ```js
-console.log(alles.spotify.id("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d"));
+alles.spotify.allesId("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d").catch(err=>console.error(err)).then(data=>console.log(data));
+```
+</details>
+<details><summary>Spotify ID > Alles spotifyData</summary> 
+
+```js
+var listeningData = alles.spotify.id(spotifyId);
+```
+example:
+```js
+alles.spotify.id("j1q7eogtchl2avybqa78430ur").catch(err=>console.error(err)).then(data=>console.log(data));
 ```
 </details>
 </details>
@@ -178,6 +201,22 @@ example:
 }
 ```
 </details>
+<details><summary>spotifyData</summary>
+
+```js
+{
+	"alles": "",                   // Alles user ID.
+	"spotify": ""                  // Discord user ID.
+}
+```
+example:
+```json
+{
+	"alles": "fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d",
+	"spotify": "j1q7eogtchl2avybqa78430ur"
+}
+```
+</details>
 <details><summary>listeningData</summary>
 
 ```js
@@ -187,16 +226,16 @@ example:
 	"checkedAt": "",                    // Timestamp of when the data was last checked with Spotify.
 	"createdAt": "",                    // Timestamp of when the user started listening to this song.
 	"item": {                           // Song object (null if the user isn't listening to anything right now)
-		"id": "",                   // Song ID.
-		"name": "",                 // Display name of the song.
-		"playing": true,            // True if the song is playing, false if it's paused.
-		"progress": 123,            // Number that indicates how far through the song the user is.
-		"duration": 321,            // Number that indicates the length of the song.
-		"explicit": false,          // True is the song is flaged as explicit, false if it isn't.
-		"artists": [                // Array of objects with information about the song artists.
-			{                   // Artist object.
-				"id": "",   // ID of the artist.
-				"name": ""  // Display name of the artist.
+		"id": "",                       // Song ID.
+		"name": "",                     // Display name of the song.
+		"playing": true,                // True if the song is playing, false if it's paused.
+		"progress": 123,                // Number that indicates how far through the song the user is.
+		"duration": 321,                // Number that indicates the length of the song.
+		"explicit": false,              // True is the song is flaged as explicit, false if it isn't.
+		"artists": [                    // Array of objects with information about the song artists.
+			{                           // Artist object.
+				"id": "",               // ID of the artist.
+				"name": ""              // Display name of the artist.
 			}
 		]
 	}
