@@ -3,8 +3,7 @@ This is a wrapper for all the public information Alles API's. It's for use on th
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
 
-> **IF THE ANY METHOD REJECTS WITH A CORS ERROR THATS BECAUSE ARCHIE DROPPED SUPPORT CORS FOR IT. GO BOTHER HIM OVER ON DISCORD SO HE ADDS CORS AGAIN!!!**
-
+> If you tany method rejects with this error code: `archie.needs.to.fucking.enable.cors` it's because the Alles API developers have dropped (or not yet added) CORS support on that API. Go bug them about it on [thir discord server]().
 
 ## Instalation
 
@@ -21,11 +20,11 @@ You can use the library from the CDN to get started quickly, but self hosting is
 ## Usage
 
 After you've included the script, you can easily use any of the APIs.
-All the mothds return a pending promise, with an `APIResponse` object. If the request succeeds then the promise will resolve. If the request fails somehow (i.e. user isn't found), then the promise will reject. You'll get an `APIResponse` object either way, but but the `response` prop might be undefined if it rejects.
+All the mothds return a pending promise, with an *APIResponse* object. If the request succeeds then the promise will resolve. If the request fails somehow (i.e. user isn't found), then the promise will reject. You'll get an *APIResponse* object either way, but but the *response* prop might be undefined if it rejects.
 ### API Reference
 
 <details><summary>Methods</summary>
-Methods are sorted by what service they intergrate with. `alles.user` methods intergrate with the core Alles User system, `alles.discord` methods intergrate with the Alles Discord Account linking system, `alles.spotify` methods intergrate with the  Alles Spotify Listening Data system.
+Methods are sorted by what service they intergrate with. *alles.user* methods intergrate with the core Alles User system, *alles.discord* methods intergrate with the Alles Discord Account linking system, *alles.spotify* methods intergrate with the  Alles Spotify Listening Data system.
 <details><summary>User methods</summary>
 <details><summary>Alles User Name (different from Custom Username) + Alles User Tag > Alles userData</summary> 
 
