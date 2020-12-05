@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+	<!-- metaaaaaaaaaaaaa -->
+	<meta name="theme-color" content="#23539B">
 	<title>Alles-web example</title>
-	<!-- This stuff is stored here: https://github.com/edazpotato/edazpotato.github.io/blob/master/static -->
+	<meta itemprop="name" content="Alles-web example">
+	<meta itemprop="description" content="Alles-web is a web javascript wrapper for the public alles APIs. It has an intuitive API, built in error messages and is asynchronous!">
+	<meta itemprop="og:title" content="Alles-web - An Alles API wrapper for the web!">
+	<meta itemprop="og:site_name" content="Alles-web example">
+	<meta itemprop="og:description" content="Alles-web is a web javascript wrapper for the public alles APIs. It has an intuitive API, built in error messages and is asynchronous!">
+	<!-- end meta tags -->
+	<!-- Begin externally hosted stuff that is stored here: https://github.com/edazpotato/edazpotato.github.io/blob/master/static -->
 	<script src='https://edazpotato.github.io/static/nprogress.js?v=0.4' defer></script>
 	<link rel='stylesheet' href='https://edazpotato.github.io/static/nprogress.css?v=0.4'/>
 	<script src='https://edazpotato.github.io/static/notyf.min.js?v=0.4' defer></script>
@@ -13,29 +21,104 @@
 	<script type="text/javascript" src="alles-web.js?v=0.4" defer></script>
 	<script type="text/javascript" src="example.js?v=0.4" defer></script>
 	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+		.link {
+			color: #4287f5;
+		}
+		.link:hover, .link:focus {
+			text-decoration: underline;
+			color: #0b5ee3;
+		}
+		.pfp-link {
+			cursor: pointer;
+		}
+		.pfp-link:hover, .pfp-link:focus {
+			color: #0b5ee3;
+		}
+		body {
+			width: 100%;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			padding: 30px;
+		}
+		main {
+			width: 100%;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		header {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 20px;
+			font-size: 200%;
+			text-align: center;
+		}
+		footer {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		input[type=text] {
+			width: 200px;
+		}
+		.pad-me {
+			padding: 5px;
+		}
 		.tallio {
 			height: 100%;
 		}
 		#user {
 			display: flex;
+			flex-direction: column;
+			alig-items: center;
+			text-align: center;
+			padding: 30px;
 		}
 		.avatar {
 			border-radius: 100%;
 			width: 250px;
 			height: 250px;
-			border: 5px solid #FFFFFF; /* So that it doesn't jump around when you load avatars for Alles+ people */
+			border: 5px solid #23539B;
 		}
 		.plus {
-			border: 5px solid #FFD700;
+			border-color: #FFD700;
 		}
 		.words {
+			padding: 10px;
 			margin-left: 10px;
 			display: flex;
 			flex-direction: column;
 		}
-		@media (max-width: 800) {
-			article {
-				padding: 25px;
+		.word {
+			padding: 5px;
+		}
+		@media (max-width: 700px) {
+			body {
+				padding: 10px;
+			}
+			header {
+				margin: 10px;
+				font-size: 130%;
+			}
+			.pad-me {
+				padding: 3px;
+			}
+			input[type=text] {
+				width: 180px;
 			}
 		}
 		.epic-gamer-progress-bar { 
@@ -70,31 +153,38 @@
 	</style>
 </head>
 <body>
+	<header>
+		<h1>Alles-web example</h1>
+	</header>
 	<main>
 		<section>
 			<form id="nametagForm">
-				<input type="text" name="nametag" id="nametag" placeholder="Edaz#5671" value="Edaz#5671" pattern="^(.*)#(\d{4})$" >
-				<input value="Submit name and tag" type="submit" required>
+				<input class="pad-me" type="text" name="nametag" id="nametag" placeholder="Hanna#2001" value="Hanna#2001" pattern="^(.*)#(\d{4})$" >
+				<input class="pad-me" value="Submit name and tag" type="submit" required>
 			</form>
 			<form id="usernameForm">
-				<input type="text" name="username" id="username" placeholder="Archie" value="Archie" pattern="(.*)">
-				<input value="Submit username" type="submit" required>
+				<input class="pad-me" type="text" name="username" id="username" placeholder="Archie" value="Archie" pattern="(.*)">
+				<input class="pad-me" value="Submit username" type="submit" required>
 			</form>
 			<form id="idForm">
-				<input type="text" name="id" id="id" placeholder="00000000-0000-0000-0000-000000000000" value="fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d" pattern="^(\w{8})-(\w{4})-(\w{4})-(\w{4})-(\w{12})$" required>
-				<input value="Submit ID" type="submit">
+				<input class="pad-me" type="text" name="id" id="id" placeholder="00000000-0000-0000-0000-000000000000" value="fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d" pattern="^(\w{8})-(\w{4})-(\w{4})-(\w{4})-(\w{12})$" required>
+				<input class="pad-me" value="Submit ID" type="submit">
 			</form>
 			<form id="discordIdForm">
-				<input type="text" name="discordId" id="discordId" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required>
-				<input value="Submit Discord ID" type="submit">
+				<input class="pad-me" type="text" name="discordId" id="discordId" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required>
+				<input class="pad-me" value="Submit Discord ID" type="submit">
 			</form>
 			<div class="switch">
-				<input id="spotify-toggle" type="checkbox"/>
+				<input class="pad-me" id="spotify-toggle" type="checkbox"/>
 				<label for="spotify-toggle" class="switch-label">Load listening data</label>
 			</div>
 		</section>
 		<article id="user">
 		</article>
 	</main>
+	<footer>
+		<section>Check this out <a class="link" href="https://github.com/edazpotato/alles-web" rel="noopener" target="_blank">on github!</a></section>
+		<section>Made with <3 by <a class="link" href="https://edazpotato.github.io" rel="noopener" target="_blank">Edazpotato</a></section>
+	</footer>
 </body>
 </html>

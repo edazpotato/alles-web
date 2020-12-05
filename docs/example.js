@@ -26,8 +26,10 @@ const notyf = new Notyf({
   duration: 4500,
   position: {
     x: 'right',
-    y: 'top',
-  }
+    y: 'bottom',
+  },
+  ripple: false,
+  dismissible: true
 });
 document.addEventListener("DOMContentLoaded", function(){
 	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
@@ -137,12 +139,12 @@ function updateProfile() {
 	}
 	var avatarUrl = "https://avatar.alles.cc/" + user.id;
 	var el = document.getElementById("user");
-	html = '<img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1>'+nickname+' ('+nametag+')</h1><h4>@'+username+'</h4><p>'+user.id+'</p></aside>';
+	html = '<img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1 class="word">'+nickname+' ('+nametag+')</h1><h4 class="word">@'+username+'</h4><p class="word">'+user.id+'</p></aside>';
 	if (song) {
 		artists = song.artists.map(function(artist){return artist.name;}).join(', ');
-		html = html + '<aside class="song-container">Currently listening to <b>'+song.name+'</b> by <b>'+artists+'</b></aside>';
+		html = html + '<aside class="song-container word">Currently listening to <b>'+song.name+'</b> by <b>'+artists+'</b></aside>';
 	}
-	html = '<section clas="card">' + html + '</section>';
+	html = '<a class="pfp-link" href="https://alles.cx/'+encodeURIComponent(user.id)+'" rel="noopener" target="_blank"><section clas="card">' + html + '</section></a>';
 	el.innerHTML = html;
 	displayingProfile = true;
 	NProgress.done();
