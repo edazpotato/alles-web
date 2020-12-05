@@ -112,6 +112,10 @@ window.alles = (function () {
 		return APIResponse(fetch(url, options));
 	}
 	var api = {
+		/* meta stuff here */
+		version: 0.4,
+		codes: allesResponseCodes,
+		/* Actuall methods here */
 		user: {
 			nametag: function(name, tag) {
 				var res = aGetJson("https://horizon.alles.cc/nametag/" + encodeURIComponent(name) + "/" + encodeURIComponent(tag));
