@@ -107,7 +107,8 @@ window.alles = (function () {
 	}
 	function aGetJson(url) {
 		var options = {
-			method: 'get'
+			method: 'get',
+			cache: 'reload'
 		}
 		return APIResponse(fetch(url, options));
 	}
