@@ -161,20 +161,20 @@
 	<main>
 		<section>
 			<form id="nametagForm">
-				<input class="pad-me" type="text" name="nametag" id="nametag" placeholder="Hanna#2001" value="Hanna#2001" pattern="^(.*)#(\d{4})$" required>
+				<input class="pad-me" type="text" name="nametag" id="nametag" placeholder="Hanna#2001" value="Hanna#2001" pattern="^(.*)#(\d{4})$"  required="true">
 				<button class="pad-me" value="Submit name and tag" type="submit" onsubmit="return false">Submit name and tag</button>
 			</form>
 			<form id="usernameForm">
-				<input class="pad-me" type="text" name="username" id="username" placeholder="Archie" value="Archie" pattern="(.*)" required>
+				<input class="pad-me" type="text" name="username" id="username" placeholder="Archie" value="Archie" pattern="(.*)"  required="true">
 				<button class="pad-me" value="Submit username" type="submit" onsubmit="return false">Submit username</button>
 			</form>
 			<form id="idForm">
-				<input class="pad-me" type="text" name="id" id="id" placeholder="00000000-0000-0000-0000-000000000000" value="fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d" pattern="^(\w{8})-(\w{4})-(\w{4})-(\w{4})-(\w{12})$" required>
+				<input class="pad-me" type="text" name="id" id="id" placeholder="00000000-0000-0000-0000-000000000000" value="fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d" pattern="^(\w{8})-(\w{4})-(\w{4})-(\w{4})-(\w{12})$" required="true">
 				<button class="pad-me" value="Submit ID" type="submit" onsubmit="return false">Submit ID</button>
 			</form>
 			<form id="discordIdForm">
-				<input class="pad-me" type="text" name="discordId" id="discordId" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required>
-				<button class="pad-me" value="Submit Discord ID" type="submit" onsubmit="return false">Submit Discord ID</button>
+				<input class="pad-me" type="text" name="discordId" id="discordId" placeholder="569414372959584256" value="569414372959584256" pattern="^[0-9]{18}$" required="true" disabled="true" disabled="true" title="Disabled until @archie decides to add CORS to the discord endpoint">
+				<button class="pad-me" value="Submit Discord ID" type="submit" onsubmit="return false" disabled="true" title="Disabled until @archie decides to add CORS to the discord endpoint">Submit Discord ID</button>
 			</form>
 		</section>
 		<article id="user">
