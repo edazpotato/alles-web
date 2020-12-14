@@ -130,16 +130,6 @@ window.alles = (function () {
 				return res;
 			}
 		},
-		spotify: {
-			allesId: function(id) {
-				 var res = aGetJson("https://spotify.alles.cc/alles/" + encodeURIComponent(id));
-				 return res;
-			},
-			id: function(id) {
-				var res = aGetJson("https://spotify.alles.cc/spotify/" + encodeURIComponent(id));
-				return res;
-			}
-		},
 		discord: {
 			allesId: function(id) {
 				 var res = aGetJson("https://discord.alles.cc/alles/" + encodeURIComponent(id));

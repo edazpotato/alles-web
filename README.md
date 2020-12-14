@@ -24,7 +24,8 @@ All the mothds return a pending promise, with an *APIResponse* object. If the re
 ### API Reference
 
 <details><summary>Methods</summary>
-Methods are sorted by what service they intergrate with. *alles.user* methods intergrate with the core Alles User system, *alles.discord* methods intergrate with the Alles Discord Account linking system, *alles.spotify* methods intergrate with the  Alles Spotify Listening Data system.
+
+Methods are sorted by what service they intergrate with. `alles.user` methods intergrate with the core Alles User system, `alles.discord` methods intergrate with the Alles Discord Account linking system.
 <details><summary>User methods</summary>
 <details><summary>Alles User Name (different from Custom Username) + Alles User Tag > Alles userData</summary> 
 
@@ -79,30 +80,9 @@ alles.discord.id("569414372959584256").catch(err=>console.error(err)).then(data=
 ```
 </details>
 </details>
-<details><summary>Spotify methods</summary>
-<details><summary>Alles ID > listeningData</summary> 
-
-```js
-var listeningData = alles.spotify.allesId("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d");
-```
-example:
-```js
-alles.spotify.allesId("fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d").catch(err=>console.error(err)).then(data=>console.log(data));
-```
-</details>
-<details><summary>Spotify ID > Alles spotifyData</summary> 
-
-```js
-var listeningData = alles.spotify.id(spotifyId);
-```
-example:
-```js
-alles.spotify.id("j1q7eogtchl2avybqa78430ur").catch(err=>console.error(err)).then(data=>console.log(data));
-```
-</details>
-</details>
 </details>
 <details><summary>Response types</summary>
+
 All methods return an `APIResponse` object, which looks like this:
 <details><summary>APIResponse</summary>
 		
@@ -197,70 +177,6 @@ example:
 	"alles": "fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d",
 	"discord": "569414372959584256",
 	"createdAt": "2020-10-28T03:11:21.000Z"
-}
-```
-</details>
-<details><summary>spotifyData</summary>
-
-```js
-{
-	"alles": "",                   // Alles user ID.
-	"spotify": ""                  // Discord user ID.
-}
-```
-example:
-```json
-{
-	"alles": "fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d",
-	"spotify": "j1q7eogtchl2avybqa78430ur"
-}
-```
-</details>
-<details><summary>listeningData</summary>
-
-```js
-{
-	"alles": "",                        // Alles user ID.
-	"spotify": "",                      // Spotify ID.
-	"checkedAt": "",                    // Timestamp of when the data was last checked with Spotify.
-	"createdAt": "",                    // Timestamp of when the user started listening to this song.
-	"item": {                           // Song object (null if the user isn't listening to anything right now)
-		"id": "",                       // Song ID.
-		"name": "",                     // Display name of the song.
-		"playing": true,                // True if the song is playing, false if it's paused.
-		"progress": 123,                // Number that indicates how far through the song the user is.
-		"duration": 321,                // Number that indicates the length of the song.
-		"explicit": false,              // True is the song is flaged as explicit, false if it isn't.
-		"artists": [                    // Array of objects with information about the song artists.
-			{                           // Artist object.
-				"id": "",               // ID of the artist.
-				"name": ""              // Display name of the artist.
-			}
-		]
-	}
-}
-```
-example:
-```json
-{
-	"alles": "fbaf303e-8f5a-453e-aad6-6b7a0aea8a7d",
-	"spotify": "j1q7eogtchl2avybqa78430ur",
-	"checkedAt": "2020-11-12T06:59:46.000Z",
-	"createdAt": "2020-10-28T03:11:21.000Z",
-	"item": {
-		"id": "0qcr5FMsEO85NAQjrlDRKo",
-		"name": "Let It Go - From \"Frozen\"/Soundtrack Version",
-		"playing": true,
-		"progress": 1757,
-		"duration": 223840,
-		"explicit": false,
-		"artists": [
-			{
-				"id": "73Np75Wv2tju61Eo9Zw4IR",
-				"name": "Idina Menzel"
-			}
-		]
-	}
 }
 ```
 </details>

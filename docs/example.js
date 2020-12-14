@@ -18,9 +18,6 @@
  // example.js
 var id = null;
 var user = null;
-var song = null;
-var spotifyIdVar = null;
-var loadSpotifyData = false;
 var displayingProfile = false;
 const notyf = new Notyf({
   duration: 4500,
@@ -32,18 +29,17 @@ const notyf = new Notyf({
   dismissible: true
 });
 document.addEventListener("DOMContentLoaded", function(){
-	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
 	var formEls = document.getElementsByTagName("form");
 	for (var i=0, el; el = formEls[i]; i++) {
 		el.addEventListener("submit", handleSubmit);
 	}
-	document.getElementById("spotify-toggle").addEventListener("change", function(e){
-		getSpotify();
-	});
 });
+function handleError(err) {
+	notyf.error(err.errorMessage);
+	NProgress.done();
+}
 function handleSubmit(e) {
 	e.preventDefault();
-	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
 	NProgress.start();
 	if (e.target.id == "nametagForm") {
 		var nametag = document.getElementById("nametag").value;
@@ -51,7 +47,7 @@ function handleSubmit(e) {
 		var name = split[0];
 		var tag = split[1];
 		alles.user.nametag(name, tag).catch(function(err){
-			notyf.error(err.errorMessage)
+			handleError(err);
 		}).then(function(res){
 			user = res.response;
 			updateProfile();
@@ -59,8 +55,7 @@ function handleSubmit(e) {
 	} else if (e.target.id == "usernameForm") {
 		var username = document.getElementById("username").value;
 		alles.user.username(username).catch(function(err){
-			notyf.error(err.errorMessage);
-			NProgress.done();
+			handleError(err);
 		}).then(function(res){
 			user = res.response;
 			updateProfile();
@@ -68,13 +63,11 @@ function handleSubmit(e) {
 	} else if (e.target.id == "discordIdForm") {
 		var discordId = document.getElementById("discordId").value;
 		alles.discord.id(discordId).catch(function(err){
-			notyf.error(err.errorMessage);
-			NProgress.done();
+			handleError(err);
 		}).then(function(res){
 			NProgress.inc();
 			alles.user.id(res.response.id).catch(function(err){
-				notyf.error(err.errorMessage);
-				NProgress.done();
+				handleError(err);
 			}).then(function(res){
 				user = res.response;
 				updateProfile();
@@ -83,34 +76,11 @@ function handleSubmit(e) {
 	} else {
 		id = {id: document.getElementById("id").value};
 		alles.user.id(id.id).catch(function(err){
-			notyf.error(err.errorMessage);
-			NProgress.done();
+			handleError(err);
 		}).then(function(res){
 			user = res.response;
 			updateProfile();
 		});
-	}
-}
-
-function getSpotify() {
-	try{clearTimeout(spotifyIdVar)}catch{}; // Clear timeout on spotify function if it exists
-	NProgress.inc();
-	loadSpotifyData = document.getElementById("spotify-toggle").checked;
-	if (displayingProfile && loadSpotifyData) {
-		alles.spotify.allesId(id.id).catch(function(err){
-			notyf.error(err.errorMessage);
-			NProgress.done();
-		}).then(function(data){
-			console.log("Got spotify!")
-			console.log(data)
-			song = data.response.item;
-			updateProfile();
-		});
-		if (loadSpotifyData) {
-			spotifyIdVar = setTimeout(getSpotify, 2500);
-		}
-	} else {
-		NProgress.done();
 	}
 }
 
@@ -140,10 +110,6 @@ function updateProfile() {
 	var avatarUrl = "https://avatar.alles.cc/" + user.id;
 	var el = document.getElementById("user");
 	html = '<img src="'+avatarUrl+'" class="avatar '+plus+'" title="'+titleText+'"/><aside class="words"><h1 class="word">'+nickname+' ('+nametag+')</h1><h4 class="word">@'+username+'</h4><p class="word">'+user.id+'</p></aside>';
-	if (song) {
-		artists = song.artists.map(function(artist){return artist.name;}).join(', ');
-		html = html + '<aside class="song-container word">Currently listening to <b>'+song.name+'</b> by <b>'+artists+'</b></aside>';
-	}
 	html = '<a class="pfp-link" href="https://alles.cx/'+encodeURIComponent(user.id)+'" rel="noopener" target="_blank"><section clas="card">' + html + '</section></a>';
 	el.innerHTML = html;
 	displayingProfile = true;
