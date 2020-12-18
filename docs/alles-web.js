@@ -116,6 +116,7 @@ window.alles = (function () {
 		/* meta stuff here */
 		version: 0.4,
 		codes: allesResponseCodes,
+		dragon: "🐉",
 		/* Actuall methods here */
 		user: {
 			nametag: function(name, tag) {
