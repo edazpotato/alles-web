@@ -3,7 +3,7 @@ This is a wrapper for all the public information Alles API's. It's for use on th
 
 [Live demo](https://edazpotato.github.io/alles-web "Click to see a live demo of the library's capabilities!")
 
-> If you tany method rejects with this error code: `archie.needs.to.fucking.enable.cors` it's because the Alles API developers have dropped (or not yet added) CORS support on that API. Go bug them about it on [thir discord server]().
+> If you any method rejects with this error code: `archie.needs.to.fucking.enable.cors` it's because the Alles API developers have dropped (or not yet added) CORS support on that API. Go bug them about it on [thir discord server]().
 
 ## Instalation
 
@@ -182,3 +182,10 @@ example:
 </details>
 </details>
 </details>
+
+
+
+
+
+
+🐉🐉
