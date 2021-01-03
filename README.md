@@ -1,3 +1,5 @@
+# **ALLES/HORIZION IS DEAD (for now) SO THIS REPO IS ARCHIVED**
+
 # alles-web V0.4
 This is a wrapper for all the public information Alles API's. It's for use on the web (not node.js).
 
